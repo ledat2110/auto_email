@@ -48,7 +48,7 @@ def get_output_email (customer_list: pd.DataFrame, template_email: dict, path: s
     assert type(customer_list) == pd.DataFrame
     assert type(template_email) == dict
     assert type(path) == str
-    df = customer_list.to_numpy()
+    df = customer_list.fillna('').to_numpy()
     template_body = template_email['body']
     body = []
     email = {}
@@ -70,10 +70,10 @@ def get_output_error (customer_list: pd.DataFrame, path: str):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("-tp", "--template_path", required=True, help="Path to the template email file")
-    parser.add_argument("-cp", "--customer_path", required=True, help="Path to the customer list csv file")
-    parser.add_argument("-op", "--output_path", help="Path to the folder that contains the invite emails", default='./output_emails')
-    parser.add_argument("-ep", "--error_path", help="Path to the file that contains the list of customers without email", default="./errors.csv")
+    parser.add_argument("-tp", "--template_path", required=True, help="Path to the template email json file. This is required.")
+    parser.add_argument("-cp", "--customer_path", required=True, help="Path to the customer list csv file. This is required.")
+    parser.add_argument("-op", "--output_path", help="Path to the folder that contains the invite emails. This is optional, the defautl folder is './output_emails/'", default='./output_emails')
+    parser.add_argument("-ep", "--error_path", help="Path to the file that contains the list of customers without email. This is optional, the default path is './errors.csv'", default="./errors.csv")
     args = parser.parse_args()
 
     # read template_email
