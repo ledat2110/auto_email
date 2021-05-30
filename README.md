@@ -43,8 +43,7 @@ This is an consolve app that create emails for a list of customers based on the 
 
 ## Docker
 
-`sudo docker load -i auto_email.tar` to load the docker image from archieve file.
-
+[Docker image](https://hub.docker.com/r/ledat2110/auto_email)
 ### Run docker
 * `sudo docker run -dit --name auto_email auto_email` to run docker container from image.
 * `sudo docker cp /path/to/template_email.json auto_email:/app/template_email.json` copy template email file from host to container with name **template_email.json**.

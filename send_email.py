@@ -71,6 +71,7 @@ def get_output_error (customer_list: pd.DataFrame, path: str):
     customer_list.to_csv(path, index=False)
 
 if __name__ == "__main__":
+    pd.set_option("mode.chained_assignment", None)
     parser = argparse.ArgumentParser()
     parser.add_argument("-tp", "--template_path", required=True, help="Path to the template email json file. This is required.")
     parser.add_argument("-cp", "--customer_path", required=True, help="Path to the customer list csv file. This is required.")
@@ -88,7 +89,7 @@ if __name__ == "__main__":
 
     # process template_body
     template_email['body'] = process_template_body(template_email['body'])
-    print(template_email)
+    #print(template_email)
 
     # filter customer_list
     valid_email_customers, invalid_email_customers = filter_customer_list(customer_list)
