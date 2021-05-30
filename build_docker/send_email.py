@@ -71,9 +71,10 @@ def get_output_error (customer_list: pd.DataFrame, path: str):
     customer_list.to_csv(path, index=False)
 
 if __name__ == "__main__":
+    pd.set_option("mode.chained_assignment", None)
     parser = argparse.ArgumentParser()
-    parser.add_argument("-tp", "--template_path", required=True, help="Path to the template email json file. This is required.")
-    parser.add_argument("-cp", "--customer_path", required=True, help="Path to the customer list csv file. This is required.")
+    parser.add_argument("-tp", "--template_path", default='./template_email.json', help="Path to the template email json file. This is required.")
+    parser.add_argument("-cp", "--customer_path", default='./customers.csv', help="Path to the customer list csv file. This is required.")
     parser.add_argument("-op", "--output_path", help="Path to the folder that contains the invite emails. This is optional, the defautl folder is './output_emails/'", default='./output_emails')
     parser.add_argument("-ep", "--error_path", help="Path to the file that contains the list of customers without email. This is optional, the default path is './errors.csv'", default="./errors.csv")
     args = parser.parse_args()
@@ -88,7 +89,7 @@ if __name__ == "__main__":
 
     # process template_body
     template_email['body'] = process_template_body(template_email['body'])
-    print(template_email)
+    #print(template_email)
 
     # filter customer_list
     valid_email_customers, invalid_email_customers = filter_customer_list(customer_list)
