@@ -40,3 +40,22 @@ This is an consolve app that create emails for a list of customers based on the 
 
 ### Example
 `python send_email.py -tp template_email.json -cp customers.csv`
+
+## Docker
+
+`sudo docker load -i auto_email.tar` to load the docker image from archieve file.
+
+### Run docker
+* `sudo docker run -dit --name auto_email auto_email` to run docker container from image.
+* `sudo docker cp /path/to/template_email.json auto_email:/app/template_email.json` copy template email file from host to container with name **template_email.json**.
+* `sudo docker cp /path/to/customers.csv auto_email:/app/customers.csv` copy customers file from host to container with name **customers.csv**.
+* `sudo docker exec auto_email python send_email.py` run to generate emails.
+* `sudo docker cp auto_email:/app/outut_emails /path/to/output_emails` copy the output emails from container to host.
+* `sudo docker cp auto_email:/app/errors.csv /path/to/errors.csv` copy the output errors file from container to host.
+
+### Run docker by sh file
+Put the template email json file and customers csv file in the same folder with sh file **run_docker.sh** with the name **template_email.json** and **customers.csv**, respectively.
+
+Run:`bash run_docker.sh`
+
+The output emails in the **output_emails** folder, and errors file with name **errors.csv**.
