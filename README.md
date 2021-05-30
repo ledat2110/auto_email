@@ -44,8 +44,10 @@ This is an consolve app that create emails for a list of customers based on the 
 ## Docker
 
 [Docker image](https://hub.docker.com/r/ledat2110/auto_email)
+* `sudo docker pull ledat2110/auto_emal` to pull the docker image from docker hub.
+
 ### Run docker
-* `sudo docker run -dit --name auto_email auto_email` to run docker container from image.
+* `sudo docker run -dit --name auto_email ledat2110/auto_email` to run docker container from image.
 * `sudo docker cp /path/to/template_email.json auto_email:/app/template_email.json` copy template email file from host to container with name **template_email.json**.
 * `sudo docker cp /path/to/customers.csv auto_email:/app/customers.csv` copy customers file from host to container with name **customers.csv**.
 * `sudo docker exec auto_email python send_email.py` run to generate emails.
@@ -53,7 +55,7 @@ This is an consolve app that create emails for a list of customers based on the 
 * `sudo docker cp auto_email:/app/errors.csv /path/to/errors.csv` copy the output errors file from container to host.
 
 ### Run docker by sh file
-Put the template email json file and customers csv file in the same folder with sh file **run_docker.sh** with the name **template_email.json** and **customers.csv**, respectively.
+After pull the docker image, put the template email json file and customers csv file in the same folder with sh file **run_docker.sh** with the name **template_email.json** and **customers.csv**, respectively.
 
 Run:`bash run_docker.sh`
 
